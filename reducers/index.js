@@ -8,9 +8,12 @@ import {
 function reducer (state = {}, action) {
   switch (action.type) {
     case RECEIVE_DECKS :
+      console.log('Receving **********', action);
       return {
         ...state,
-        ...action.decks,
+        decks: {
+          ...action.decks
+        }
       }
     case GET_DECK :
       return {
