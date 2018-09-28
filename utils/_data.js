@@ -29,12 +29,14 @@ export function _getDecks () {
     setTimeout(() => res({...decks}), 300)
   })
 }
+
 export function _getDeck (id) {
   // take in a single id argument and return the deck associated with that id.
   return new Promise((res, rej) => {
     setTimeout(() => res({decks[id]}), 300)
   })
 }
+
 export function _saveDeckTitle (title) {
   // take in a single title argument and add it to the decks.
   return new Promise((res, rej) => {
@@ -52,6 +54,7 @@ export function _saveDeckTitle (title) {
 
   })
 }
+
 export function _addCardToDeck (title, card) {
   // take in two arguments, title and card, and will add the card to the list
   // of questions for the deck with the associated title.
