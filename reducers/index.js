@@ -1,14 +1,13 @@
 import {
   RECEIVE_DECKS,
   GET_DECK,
-  SET_TITLE,
+  ADD_DECK,
   ADD_CARD
 } from '../actions'
 
 function reducer (state = {}, action) {
   switch (action.type) {
     case RECEIVE_DECKS :
-      console.log('Receving **********', action);
       return {
         ...state,
         decks: {
@@ -19,9 +18,13 @@ function reducer (state = {}, action) {
       return {
         ...state,
       }
-    case SET_TITLE :
+    case ADD_DECK :
       return {
         ...state,
+        decks: {
+          ...state.decks,
+          [action.deck.title]: action.deck
+        }
       }
     case ADD_CARD :
       return {

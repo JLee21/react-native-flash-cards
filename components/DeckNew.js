@@ -3,16 +3,29 @@ import { View, Text, StyleSheet, TouchableOpacity,
   TextInput, TextButton
 } from 'react-native'
 import { connect } from 'react-redux'
-import { receiveDecks } from '../actions'
-import { fetchDecks } from '../utils/api'
+import { addDeck } from '../actions'
+import { fetchDecks, submitDeck } from '../utils/api'
 import { AppLoading} from 'expo'
 
 class DeckNew extends Component {
   state = {
-    text: ''
+    text: 'NewDefault'
   }
   handleSaveTitle = () => {
     console.log(this.state);
+    const deck = {
+      title: this.state.text,
+      questions: []
+    }
+
+    // Save to Store
+    this.props.dispatch(addDeck(deck))
+
+    // Save to AsyncStorage
+    submitDeck(deck)
+
+    this.props.navigation.navigate('Home')
+
   }
 
   render () {
@@ -23,7 +36,7 @@ class DeckNew extends Component {
         <Text>Create New Deck</Text>
         <TextInput
           style={{height: 40}}
-          placeholder="Type here!"
+          placeholder="Type new deck title here ..."
           onChangeText={(text) => this.setState({text})}
         />
         <TouchableOpacity
