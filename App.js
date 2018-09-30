@@ -11,23 +11,9 @@ import { receiveDecks } from './actions'
 import DeckList from './components/DeckList'
 import DeckView from './components/DeckView'
 import DeckNew from './components/DeckNew'
+import CardAdd from './components/CardAdd'
 
 const store = createStore(reducer, composeWithDevTools(middleware))
-
-const Home = ({ navigation }) => (
-  <View>
-    <Text>This is the Home view</Text>
-    <TouchableOpacity onPress={() => navigation.navigate('DeckList')}>
-      <Text>Press here for the Dashboard</Text>
-    </TouchableOpacity>
-  </View>
-);
-
-const Dashboard = () => (
-  <View style={styles.container}>
-    <Text>This is the !!!!!!</Text>
-  </View>
-);
 
 const Tabs = createBottomTabNavigator({
   Home: {
@@ -47,7 +33,6 @@ const Tabs = createBottomTabNavigator({
   }
 })
 
-
 const MainStack = createStackNavigator(
   {
     Home: {
@@ -58,6 +43,9 @@ const MainStack = createStackNavigator(
     },
     DeckView: {
       screen: DeckView
+    },
+    CardAdd: {
+      screen: CardAdd
     },
 })
 

@@ -11,3 +11,9 @@ export function submitDeck (deck) {
     [deck.title]: deck
   }))
 }
+
+// export function submitCard (card) {
+//   return AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify({
+//     [deck.title]: deck
+//   }))
+// }

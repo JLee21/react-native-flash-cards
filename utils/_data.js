@@ -3,10 +3,11 @@ import { AsyncStorage } from 'react-native'
 export const DECK_STORAGE_KEY = 'FlashCards:decks'
 
 export function setExampleData () {
-  Object.keys(decks).map((key) => {
-    AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks[key]))
-  })
-  console.log(decks);
+  // Object.keys(decks).map((key) => {
+  //   AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks[key]))
+  // })
+
+  AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
   return decks
 }
 

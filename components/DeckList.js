@@ -23,12 +23,6 @@ class DeckList extends Component {
     const { loading } = this.state
     const { decks, navigation } = this.props
 
-    console.log(('********'));
-    decks && Object.keys(decks).map((key) => {
-      console.log(key);
-    })
-    console.log(('********'));
-
     if (loading) {
       return <AppLoading />
     }
