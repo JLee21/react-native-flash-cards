@@ -8,7 +8,7 @@ Users should be able to quiz themselves on a specific deck and receive a score o
 Users should receive a notification to remind themselves to study if they haven't already for that day.
 
 ### Views
-https://classroom.udacity.com/nanodegrees/nd019/parts/580105de-1f39-4975-866d-4f430f1aef1d/modules/1688bcd3-4384-4d37-8564-39d16da178b4/lessons/18fb0b90-21c7-42bf-a719-f16f804c1e25/concepts/4a0c5448-4b5d-4f30-8db3-e7aaf0295701
+https://classroom.udacity.com/nanodegrees/nd019/parts/580105de-1f39-4975-866d-4f430f1aef1d/modules/1688bcd3-4384-4d37-8564-39d16da178b4/lessons/18fb0b90-21c7-42bf-a719-f16f804c1e25/concepts/4a0c5448-4b5d-4f30-8db3-e7aaf0295701\
 
 Deck List View (Default View)
   displays the title of each Deck

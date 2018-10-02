@@ -8,7 +8,10 @@ import { AppLoading} from 'expo'
 class DeckView extends Component {
 
   startQuiz = () => {
-    console.log('Starting Quiz');
+    const { deck, navigation } = this.props
+    navigation.navigate('QuizContainer', {
+      'deckId': deck.title
+    })
   }
 
   addCard = () => {
@@ -20,6 +23,7 @@ class DeckView extends Component {
 
   render () {
     const { deck, navigation } = this.props
+    const deckLength = deck.questions.length
 
     return (
       <View>
@@ -27,9 +31,15 @@ class DeckView extends Component {
         <Text>Title: {deck.title}</Text>
         <Text>Number of Questions: {deck.questions.length}</Text>
 
-        <TouchableOpacity onPress={this.startQuiz}>
-          <Text>Start Quiz</Text>
-        </TouchableOpacity>
+        {deckLength > 0
+          ?
+            <TouchableOpacity onPress={this.startQuiz}>
+              <Text>Start Quiz</Text>
+            </TouchableOpacity>
+          :
+            <Text>Please add cards to your deck!</Text>
+        }
+
 
         <TouchableOpacity onPress={this.addCard}>
           <Text>Add Card</Text>

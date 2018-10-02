@@ -22,13 +22,11 @@ class DeckNew extends Component {
       }
     }
 
-    // Save to Store
+    // Save to Store and
+    // update AsyncStorage
     this.props.dispatch(addCard(card))
 
-    // Save to AsyncStorage
-    // submitCard(card)
-
-    // this.props.navigation.goBack()
+    this.props.navigation.goBack()
 
   }
 

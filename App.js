@@ -12,6 +12,8 @@ import DeckList from './components/DeckList'
 import DeckView from './components/DeckView'
 import DeckNew from './components/DeckNew'
 import CardAdd from './components/CardAdd'
+import QuizContainer from './components/QuizContainer'
+import QuizCard from './components/QuizCard'
 
 const store = createStore(reducer, composeWithDevTools(middleware))
 
@@ -47,7 +49,14 @@ const MainStack = createStackNavigator(
     CardAdd: {
       screen: CardAdd
     },
-})
+    QuizContainer: {
+      screen: QuizContainer
+    },
+    QuizCard: {
+      screen: QuizCard
+    },
+  }
+)
 
 export default class App extends React.Component {
 
