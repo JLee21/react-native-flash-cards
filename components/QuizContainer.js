@@ -62,11 +62,9 @@ class QuizContainer extends Component {
     const numCards = deck.questions.length
     const questionsRemaining = deck.questions.length - cardNum
 
-
     return (
       <View>
         <Text>QuizContainer</Text>
-
 
         { showResults &&
           <View>
@@ -75,12 +73,19 @@ class QuizContainer extends Component {
               onPress={this.restart}>
               <Text>Restart Quiz</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => (navigation.navigate('Home'))}>
+              <Text>Go Back to Decks</Text>
+            </TouchableOpacity>
           </View>
         }
 
         { (card && !showResults) &&
           <View>
-            <Text>Questions Remaining: {questionsRemaining}</Text>
+            {questionsRemaining > 1
+              ? <Text>Questions Remaining: {questionsRemaining}</Text>
+              : <Text>Last Question!</Text>
+            }
             <QuizCard card={card} submit={this.onUserSubmit}/>
           </View>
         }
@@ -96,10 +101,6 @@ function mapStateToProps ( { decks }, { navigation }) {
   return {
     deck: decks[deckId]
   }
-}
-
-function mapDispatchToProps () {
-
 }
 
 export default connect(mapStateToProps)(QuizContainer)

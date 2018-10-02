@@ -51,16 +51,9 @@ class QuizCard extends Component {
               </TouchableOpacity>
             </View>
         }
-
       </View>
     )
   }
 }
 
-function mapStateToProps ( ) {
-}
-
-function mapDispatchToProps () {
-}
-
-export default connect()(QuizCard)
+export default QuizCard
