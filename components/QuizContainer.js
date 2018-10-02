@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { receiveDecks } from '../actions'
 import { fetchDecks } from '../utils/api'
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
 import { AppLoading} from 'expo'
 import QuizCard, { CORRECT, INCORRECT } from './QuizCard'
 
@@ -42,6 +43,11 @@ class QuizContainer extends Component {
     // After going through all the cards, show results.
     if (newCardNum == maxCount) {
       this.setState({showResults: true})
+
+      // Clear notifications for today, the user completed a quiz
+      clearLocalNotification()
+        .then(setLocalNotification)
+
     } else {
       this.setState({cardNum: newCardNum})
     }

@@ -7,6 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import reducer from './reducers'
 import middleware from './middleware'
 import { fetchDecks } from './utils/api'
+import { setLocalNotification } from './utils/notifications'
 import { receiveDecks } from './actions'
 import DeckList from './components/DeckList'
 import DeckView from './components/DeckView'
@@ -59,6 +60,10 @@ const MainStack = createStackNavigator(
 )
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification()
+  }
 
   render() {
     return (

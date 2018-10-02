@@ -27,7 +27,6 @@ class QuizCard extends Component {
   render () {
     const { showAnswer } = this.state
     const { card } = this.props
-    console.log('card', card);
 
     return (
       <View>
