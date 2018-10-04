@@ -1,4 +1,16 @@
-### Specific Requirements
+### Getting Started
+
+This project is build for iOS.
+
+```
+git clone https://github.com/JLee21/React-Native-Flash-Cards.git
+cd React-Native-Flash-Cards
+yarn install
+yarn ios
+```
+
+
+### Project Requirements
 Use create-react-native-app to build your project.
 Allow users to create a deck which can hold an unlimited number of cards.
 Allow users to add a card to a specific deck.
