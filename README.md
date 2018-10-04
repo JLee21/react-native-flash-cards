@@ -1,6 +1,6 @@
 ### Getting Started
 
-This project is build for iOS.
+This project is built for iOS.
 
 ```
 git clone https://github.com/JLee21/React-Native-Flash-Cards.git
