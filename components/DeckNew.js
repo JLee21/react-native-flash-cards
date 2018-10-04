@@ -11,6 +11,7 @@ class DeckNew extends Component {
     text: ''
   }
   handleSaveTitle = () => {
+    const { dispatch, navigation } = this.props
     const { text } = this.state
     const title = text == '' ? 'Default Title' : this.state.text
     const deck = {
@@ -20,12 +21,13 @@ class DeckNew extends Component {
     this.setState({text: ''})
 
     // Save to Store
-    this.props.dispatch(addDeck(deck))
+    dispatch(addDeck(deck))
 
     // Save to AsyncStorage
     submitDeck(deck)
 
-    this.props.navigation.navigate('Home')
+    navigation.navigate('DeckView', { deckId: title })
+    // this.props.navigation.navigate('Home')
 
   }
 
