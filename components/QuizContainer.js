@@ -8,7 +8,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { styles } from '../utils/styles'
 
 class QuizContainer extends Component {
-  
+
   static navigationOptions = {
     title: 'Quiz',
   };
@@ -83,6 +83,12 @@ class QuizContainer extends Component {
               style={[styles.item, {justifyContent: 'center'}]}
               onPress={this.restart}>
               <Title>Restart Quiz</Title>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.item, {justifyContent: 'center'}]}
+              onPress={() => navigation.navigate('DeckView', { deckId: deck.title })}
+              >
+              <Title>Back to Deck</Title>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.item, {justifyContent: 'center'}]}
