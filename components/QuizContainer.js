@@ -80,18 +80,18 @@ class QuizContainer extends Component {
             <Title styleName='h-center'>Score {numCorrect} / {numCards} </Title>
             <Divider />
             <TouchableOpacity
-              style={[styles.item, {justifyContent: 'center'}]}
+              style={styles.item}
               onPress={this.restart}>
               <Title>Restart Quiz</Title>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.item, {justifyContent: 'center'}]}
+              style={styles.item}
               onPress={() => navigation.navigate('DeckView', { deckId: deck.title })}
               >
               <Title>Back to Deck</Title>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.item, {justifyContent: 'center'}]}
+              style={styles.item}
               onPress={() => (navigation.navigate('Home'))}>
               <Title>Go Home</Title>
             </TouchableOpacity>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Text, Title } from '@shoutem/ui'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { styles } from '../utils/styles'
+import { getCardStr } from '../utils/helper'
 
 class DeckView extends Component {
 
@@ -24,7 +25,7 @@ class DeckView extends Component {
   render () {
     const { deck, navigation } = this.props
     const deckLength = deck.questions.length
-    const cardStr = deck.questions.length > 1 ? 'cards' : 'card'
+    const cardStr = getCardStr(deck)
 
     return (
       <View>
@@ -41,7 +42,7 @@ class DeckView extends Component {
 
         {deckLength > 0
           ? <TouchableOpacity
-              style={[styles.item, {justifyContent: 'center'}]}
+              style={styles.item}
               onPress={this.startQuiz}>
               <Title>Start Quiz</Title>
             </TouchableOpacity>
@@ -49,7 +50,7 @@ class DeckView extends Component {
         }
 
         <TouchableOpacity
-          style={[styles.item, {justifyContent: 'center'}]}
+          style={styles.item}
           onPress={this.addCard}>
           <Title>Add Card</Title>
         </TouchableOpacity>

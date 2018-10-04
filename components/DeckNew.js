@@ -18,7 +18,6 @@ class DeckNew extends Component {
       title,
       questions: []
     }
-    this.setState({text: ''})
 
     // Save to Store
     dispatch(addDeck(deck))
@@ -26,8 +25,9 @@ class DeckNew extends Component {
     // Save to AsyncStorage
     submitDeck(deck)
 
+    this.setState({text: ''})
+
     navigation.navigate('DeckView', { deckId: title })
-    // this.props.navigation.navigate('Home')
 
   }
 
@@ -42,7 +42,7 @@ class DeckNew extends Component {
           onChangeText={(text) => this.setState({text})}
         />
         <TouchableOpacity
-          style={[styles.item, {justifyContent: 'center'}]}
+          style={styles.item}
           onPress={this.handleSaveTitle}>
           <Title>Save</Title>
         </TouchableOpacity>

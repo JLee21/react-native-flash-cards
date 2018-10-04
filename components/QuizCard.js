@@ -38,7 +38,7 @@ class QuizCard extends Component {
         {!showAnswer
           ? <View style={{justifyContent: 'flex-end'}}>
               <TouchableOpacity
-                style={[styles.item, {justifyContent: 'center'}]}
+                style={styles.item}
                 onPress={this.showAnswer}>
                 <Title>Show Answer</Title>
               </TouchableOpacity>
@@ -46,12 +46,12 @@ class QuizCard extends Component {
           : <View style={{padding: 20, margin: 10}}>
               <Title>{card.answer}</Title>
               <TouchableOpacity
-                style={[styles.item, {justifyContent: 'center'}]}
+                style={styles.item}
                 onPress={() => (this.handleSubmit(CORRECT))}>
                 <Title>Correct</Title>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.item, {justifyContent: 'center', backgroundColor: colors.black}]}
+                style={[styles.item, {backgroundColor: colors.black}]}
                 onPress={() => (this.handleSubmit(INCORRECT))}>
                 <Title style={{color: colors.white}}>Incorrect</Title>
               </TouchableOpacity>

@@ -57,8 +57,8 @@ class DeckNew extends Component {
         />
         <TouchableOpacity
           style={disable
-            ? [styles.disable, {justifyContent: 'center'}]
-            : [styles.item, {justifyContent: 'center'}]}
+            ? styles.disable
+            : styles.item}
           disabled={disable}
           onPress={this.handleSubmit}>
           <Title>Add</Title>
@@ -74,10 +74,6 @@ function mapStateToProps ( { decks }, { navigation }) {
   return {
     deckId,
   }
-}
-
-function mapDispatchToProps () {
-
 }
 
 export default connect(mapStateToProps)(DeckNew)

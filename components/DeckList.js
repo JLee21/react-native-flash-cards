@@ -8,6 +8,7 @@ import { receiveDecks } from '../actions'
 import { fetchDecks } from '../utils/api'
 import DeckView from './DeckView'
 import { styles } from '../utils/styles'
+import { getCardStr } from '../utils/helper'
 
 class DeckList extends Component {
 
@@ -35,10 +36,11 @@ class DeckList extends Component {
       <View style={{marginTop: 10}}>
         {decks &&
           Object.keys(decks).map((key) => {
-            const cardStr = decks[key].questions.length > 1 ? 'cards' : 'card'
+            const cardStr = getCardStr(decks[key])
+
             return (
               <TouchableOpacity
-                style={styles.item}
+                style={styles.itemList}
                 key={key}
                 onPress={() => navigation.navigate(
                   'DeckView',
