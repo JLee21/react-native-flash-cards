@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import { receiveDecks } from '../actions'
-import { fetchDecks } from '../utils/api'
-import { AppLoading} from 'expo'
+import { Text, Title } from '@shoutem/ui'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { styles } from '../utils/styles'
 
 class DeckView extends Component {
 
@@ -24,25 +24,34 @@ class DeckView extends Component {
   render () {
     const { deck, navigation } = this.props
     const deckLength = deck.questions.length
+    const cardStr = deck.questions.length > 1 ? 'cards' : 'card'
 
     return (
       <View>
-        <Text>Deck View</Text>
-        <Text>Title: {deck.title}</Text>
-        <Text>Number of Questions: {deck.questions.length}</Text>
+
+        <View style={styles.title}>
+          <View style={{flexDirection: 'row'}}>
+            <MaterialCommunityIcons name='cards-outline' size={30} />
+            <Title style={{marginLeft: 8}}>{deck.title}</Title>
+          </View>
+          <View>
+            <Title>{deck.questions.length} {cardStr}</Title>
+          </View>
+        </View>
 
         {deckLength > 0
-          ?
-            <TouchableOpacity onPress={this.startQuiz}>
-              <Text>Start Quiz</Text>
+          ? <TouchableOpacity
+              style={[styles.item, {justifyContent: 'center'}]}
+              onPress={this.startQuiz}>
+              <Title>Start Quiz</Title>
             </TouchableOpacity>
-          :
-            <Text>Please add cards to your deck!</Text>
+          : <Text styleName='h-center'>Please add cards to your deck!</Text>
         }
 
-
-        <TouchableOpacity onPress={this.addCard}>
-          <Text>Add Card</Text>
+        <TouchableOpacity
+          style={[styles.item, {justifyContent: 'center'}]}
+          onPress={this.addCard}>
+          <Title>Add Card</Title>
         </TouchableOpacity>
 
       </View>
@@ -54,13 +63,8 @@ function mapStateToProps ( { decks }, { navigation }) {
   const { deckId } = navigation.state.params
 
   return {
-    deckId,
     deck: decks[deckId]
   }
-}
-
-function mapDispatchToProps () {
-
 }
 
 export default connect(mapStateToProps)(DeckView)

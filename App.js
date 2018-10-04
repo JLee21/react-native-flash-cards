@@ -46,7 +46,10 @@ const Tabs = createBottomTabNavigator({
 const MainStack = createStackNavigator(
   {
     Home: {
-      screen: Tabs
+      screen: Tabs,
+      navigationOptions: {
+        title: 'Flash Cards'
+      },
     },
     DeckList: {
       screen: DeckList

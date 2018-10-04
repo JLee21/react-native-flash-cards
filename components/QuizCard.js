@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
+import { Divider, Heading, Title } from '@shoutem/ui'
 import { connect } from 'react-redux'
-import { receiveDecks } from '../actions'
-import { fetchDecks } from '../utils/api'
-import { AppLoading} from 'expo'
+import { styles } from '../utils/styles'
+import * as colors from '../utils/colors'
 
 export const CORRECT = 'correct'
 export const INCORRECT = 'incorrect'
@@ -30,23 +30,30 @@ class QuizCard extends Component {
 
     return (
       <View>
-        <Text>QuizCard</Text>
-        <Text>{card.question}</Text>
+        <View style={styles.questionView}>
+          <Title>{card.question}</Title>
+        </View>
+        <Divider />
 
         {!showAnswer
-          ? <TouchableOpacity
-              onPress={this.showAnswer}>
-              <Text>Show Answer</Text>
-            </TouchableOpacity>
-          : <View>
-              <Text>{card.answer}</Text>
+          ? <View style={{justifyContent: 'flex-end'}}>
               <TouchableOpacity
+                style={[styles.item, {justifyContent: 'center'}]}
+                onPress={this.showAnswer}>
+                <Title>Show Answer</Title>
+              </TouchableOpacity>
+            </View>
+          : <View style={{padding: 20, margin: 10}}>
+              <Title>{card.answer}</Title>
+              <TouchableOpacity
+                style={[styles.item, {justifyContent: 'center'}]}
                 onPress={() => (this.handleSubmit(CORRECT))}>
-                <Text>Correct</Text>
+                <Title>Correct</Title>
               </TouchableOpacity>
               <TouchableOpacity
+                style={[styles.item, {justifyContent: 'center', backgroundColor: colors.black}]}
                 onPress={() => (this.handleSubmit(INCORRECT))}>
-                <Text>Incorrect</Text>
+                <Title style={{color: colors.white}}>Incorrect</Title>
               </TouchableOpacity>
             </View>
         }

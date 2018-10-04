@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { AppLoading} from 'expo'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { Title, View } from '@shoutem/ui'
 import { receiveDecks } from '../actions'
 import { fetchDecks } from '../utils/api'
-import { white } from '../utils/colors'
 import DeckView from './DeckView'
-import { Heading, Title, View } from '@shoutem/ui'
+import { styles } from '../utils/styles'
 
 class DeckList extends Component {
+
   state = {
     loading: true,
   }
@@ -31,10 +32,10 @@ class DeckList extends Component {
     }
 
     return (
-      <View styleName='h-center' style={{marginTop: 10}}>
-        <Heading styleName='h-center'>Working Title</Heading>
+      <View style={{marginTop: 10}}>
         {decks &&
           Object.keys(decks).map((key) => {
+            const cardStr = decks[key].questions.length > 1 ? 'cards' : 'card'
             return (
               <TouchableOpacity
                 style={styles.item}
@@ -45,7 +46,7 @@ class DeckList extends Component {
               )}>
                 <MaterialCommunityIcons name='cards-outline' size={30} />
                 <Title>{decks[key].title}</Title>
-                <Title>{decks[key].questions.length} cards</Title>
+                <Title>{decks[key].questions.length} {cardStr}</Title>
               </TouchableOpacity>
             )
           })
@@ -55,36 +56,7 @@ class DeckList extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  heading: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  item: {
-    flexDirection: 'row',
-    backgroundColor: white,
-    borderRadius: Platform.OS === 'ios' ? 16 : 2,
-    padding: 20,
-    marginLeft: 10,
-    marginRight: 10,
-    marginTop: 17,
-    justifyContent: 'space-between',
-    shadowRadius: 3,
-    shadowOpacity: 0.8,
-    shadowColor: 'rgba(0, 0, 0, 0.24)',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-  },
-  noDataText: {
-    fontSize: 20,
-    paddingTop: 20,
-    paddingBottom: 20
-  }
-})
-
-function mapStateToProps ( { decks }, { navigation }) {
+function mapStateToProps ( { decks } ) {
   return {
     decks
   }

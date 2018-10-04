@@ -1,18 +1,22 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
+import { Divider, Title } from '@shoutem/ui'
 import { connect } from 'react-redux'
-import { receiveDecks } from '../actions'
-import { fetchDecks } from '../utils/api'
 import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
-import { AppLoading} from 'expo'
-import QuizCard, { CORRECT, INCORRECT } from './QuizCard'
+import QuizCard, { CORRECT } from './QuizCard'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { styles } from '../utils/styles'
 
 class QuizContainer extends Component {
+  
+  static navigationOptions = {
+    title: 'Quiz',
+  };
 
   state = {
     numCorrect: 0,
     cardNum: 0,
-    showResults: false
+    showResults: false,
   }
 
   onUserSubmit = (userAnswer) => {
@@ -38,13 +42,13 @@ class QuizContainer extends Component {
       })
     }
 
-    // Increment to next card.
     const newCardNum = this.state.cardNum + 1
+
     // After going through all the cards, show results.
     if (newCardNum == maxCount) {
       this.setState({showResults: true})
 
-      // Clear notifications for today, the user completed a quiz
+      // Clear notifications for today since the user completed a quiz
       clearLocalNotification()
         .then(setLocalNotification)
 
@@ -70,28 +74,41 @@ class QuizContainer extends Component {
 
     return (
       <View>
-        <Text>QuizContainer</Text>
-
         { showResults &&
           <View>
-            <Text>Your Score! {numCorrect} / {numCards} </Text>
+            <Divider />
+            <Title styleName='h-center'>Score {numCorrect} / {numCards} </Title>
+            <Divider />
             <TouchableOpacity
+              style={[styles.item, {justifyContent: 'center'}]}
               onPress={this.restart}>
-              <Text>Restart Quiz</Text>
+              <Title>Restart Quiz</Title>
             </TouchableOpacity>
             <TouchableOpacity
+              style={[styles.item, {justifyContent: 'center'}]}
               onPress={() => (navigation.navigate('Home'))}>
-              <Text>Go Back to Decks</Text>
+              <Title>Go Home</Title>
             </TouchableOpacity>
           </View>
         }
 
         { (card && !showResults) &&
+
+
           <View>
-            {questionsRemaining > 1
-              ? <Text>Questions Remaining: {questionsRemaining}</Text>
-              : <Text>Last Question!</Text>
-            }
+
+            <View style={styles.title}>
+              <View style={{flexDirection: 'row'}}>
+                <MaterialCommunityIcons name='cards-outline' size={30} />
+                <Title style={{marginLeft: 8}}>{deck.title}</Title>
+              </View>
+              <View>
+                {questionsRemaining > 1
+                  ? <Title styleName={'v-center'}>Cards left: {questionsRemaining}</Title>
+                  : <Title>Last Question!</Title>
+                }
+                </View>
+            </View>
             <QuizCard card={card} submit={this.onUserSubmit}/>
           </View>
         }

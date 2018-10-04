@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity,
-  TextInput, TextButton
-} from 'react-native'
+import { TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { Heading, Title, View } from '@shoutem/ui'
+import { styles } from '../utils/styles'
 import { addDeck } from '../actions'
-import { fetchDecks, submitDeck } from '../utils/api'
-import { AppLoading} from 'expo'
+import { submitDeck } from '../utils/api'
 
 class DeckNew extends Component {
   state = {
-    text: 'NewDefault'
+    text: ''
   }
   handleSaveTitle = () => {
-    console.log(this.state);
+    const { text } = this.state
+    const title = text == '' ? 'Default Title' : this.state.text
     const deck = {
-      title: this.state.text,
+      title,
       questions: []
     }
+    this.setState({text: ''})
 
     // Save to Store
     this.props.dispatch(addDeck(deck))
@@ -33,32 +34,19 @@ class DeckNew extends Component {
 
     return (
       <View>
-        <Text>Create New Deck</Text>
         <TextInput
-          style={{height: 40}}
-          placeholder="Type new deck title here ..."
+          style={styles.textInput}
+          placeholder="Type a new deck title here ..."
           onChangeText={(text) => this.setState({text})}
         />
         <TouchableOpacity
+          style={[styles.item, {justifyContent: 'center'}]}
           onPress={this.handleSaveTitle}>
-            <Text>Save</Text>
+          <Title>Save</Title>
         </TouchableOpacity>
       </View>
     )
   }
 }
 
-function mapStateToProps ( { decks }, { navigation }) {
-  // const { deckId } = navigation.state.params
-  //
-  return {
-    // deckId,
-    // deck: decks[deckId]
-  }
-}
-
-function mapDispatchToProps () {
-
-}
-
-export default connect(mapStateToProps)(DeckNew)
+export default connect()(DeckNew)

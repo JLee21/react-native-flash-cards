@@ -1,19 +1,29 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity,
-  TextInput, TextButton
+import {
+  View,
+  TouchableOpacity,
+  TextInput
 } from 'react-native'
 import { connect } from 'react-redux'
+import { Divider, Title } from '@shoutem/ui'
+import { styles } from '../utils/styles'
 import { addCard } from '../actions'
-import { fetchDecks, submitCard } from '../utils/api'
-import { AppLoading} from 'expo'
 
 class DeckNew extends Component {
+
+  static navigationOptions = {
+    title: 'Add Card',
+  };
+
   state = {
-    textQuestion: 'QuestionDefault',
-    textAnswer: 'AnswerDefault'
+    textQuestion: '',
+    textAnswer: '',
   }
+
   handleSubmit = () => {
-    const { deckId } = this.props
+    const { deckId, dispatch, navigation } = this.props
+    const { textQuestion, textAnswer } = this.state
+
     const card = {
       deckId,
       question: {
@@ -21,34 +31,37 @@ class DeckNew extends Component {
         answer: this.state.textAnswer
       }
     }
+    // Save to Store and update AsyncStorage
+    dispatch(addCard(card))
 
-    // Save to Store and
-    // update AsyncStorage
-    this.props.dispatch(addCard(card))
-
-    this.props.navigation.goBack()
-
+    navigation.goBack()
   }
 
   render () {
     const { navigation } = this.props
+    const { textQuestion, textAnswer } = this.state
+    const disable = !(textQuestion && textAnswer)
 
     return (
       <View>
-        <Text>Add New Card</Text>
         <TextInput
-          style={{height: 40}}
+          style={styles.textInput}
           placeholder="Type the question here ..."
           onChangeText={(text) => this.setState({ textQuestion: text})}
         />
+        <Divider styleName="line" />
         <TextInput
-          style={{height: 40}}
+          style={styles.textInput}
           placeholder="Type the answer here ..."
           onChangeText={(text) => this.setState({ textAnswer: text })}
         />
         <TouchableOpacity
+          style={disable
+            ? [styles.disable, {justifyContent: 'center'}]
+            : [styles.item, {justifyContent: 'center'}]}
+          disabled={disable}
           onPress={this.handleSubmit}>
-            <Text>Add</Text>
+          <Title>Add</Title>
         </TouchableOpacity>
       </View>
     )
