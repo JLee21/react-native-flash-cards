@@ -1,7 +1,7 @@
 
-![](./imgs/collage-0.PNG)
+![](./imgs/collage-0.png)
 
-![](./imgs/collage-1.PNG)
+![](./imgs/collage-1.png)
 
 ### Getting Started
 
